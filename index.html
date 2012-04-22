@@ -1,0 +1,155 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>AllanJS by txipi</title>
+    
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1>AllanJS</h1>
+        <p>Frequency Stability Analysis library for JavaScript</p>
+        <p class="view"><a href="https://github.com/txipi/AllanJS">View the Project on GitHub <small>txipi/AllanJS</small></a></p>
+        <ul>
+          <li><a href="https://github.com/txipi/AllanJS/zipball/master">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/txipi/AllanJS/tarball/master">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/txipi/AllanJS">Fork On <strong>GitHub</strong></a></li>
+        </ul>
+      </header>
+      <section>
+        <h1>Overview</h1>
+
+<p>AllanJS is a Frequency Stability Analysis library for JavaScript. </p>
+
+<p>A gentle introduction to Frequency Stability Analysis is provided by <a href="http://tf.nist.gov/timefreq/general/pdf/2220.pdf">NIST Special Publication 1065</a>, written by <a href="http://www.wriley.com">W.J. Riley</a>.</p>
+
+<h1>Features</h1>
+
+<h2>Data loading</h2>
+
+<ul>
+<li>Load phase or frequency data from an array.</li>
+<li>Load phase or frequency data from file / URL.</li>
+</ul><h2>Data preprocessing</h2>
+
+<ul>
+<li>Phase to frequency conversion.</li>
+<li>Frequency to phase conversion.</li>
+</ul><h2>Frequency Stability Measures</h2>
+
+<ul>
+<li>Maximum, minimum, mean and standard deviation for phase and frequency values based on averaging times (tau).</li>
+<li>Original Allan deviation (<strong>ADEV</strong>).</li>
+<li>Overlapping Allan deviation (<strong>OADEV</strong>).</li>
+<li>Modified Allan deviation (<strong>MDEV</strong>).</li>
+<li>Time deviation (<strong>TDEV</strong>).</li>
+<li>Hadamard deviation (<strong>HDEV</strong>).</li>
+<li>Overlapping Hadamard deviation (<strong>OHDEV</strong>).</li>
+<li>Total deviation (<strong>TOTDEV</strong>).</li>
+<li>Modified Total deviation (<strong>MTOTDEV</strong>).</li>
+<li>Time Total deviation (<strong>TTOTDEV</strong>).</li>
+<li>Hadamard Total deviation (<strong>HTOTDEV</strong>).</li>
+</ul><h2>Plots</h2>
+
+<ul>
+<li>Phase data plot.</li>
+<li>Frequency data plot.</li>
+<li>
+<strong>Sigma-tau</strong> plots of Allan estimators.</li>
+</ul><h1>Screenshots</h1>
+
+<p><strong>Phase data plot:</strong></p>
+
+<p><img src="http://github.com/txipi/AllanJS/raw/master/screenshots/allanjs-phase.png" alt="Phase"></p>
+
+<p><strong>Frequency data plot:</strong></p>
+
+<p><img src="http://github.com/txipi/AllanJS/raw/master/screenshots/allanjs-frequency.png" alt="Frequency"></p>
+
+<p><strong>Sigma-tau plot:</strong></p>
+
+<p><img src="http://github.com/txipi/AllanJS/raw/master/screenshots/allanjs-sigmatau.png" alt="Sigma-tau"></p>
+
+<h1>How to use it</h1>
+
+<p>Include AllanJS and Flot + jQuery:</p>
+
+<pre><code>&lt;script language="javascript" type="text/javascript" src="js/jquery.min.js"&gt;&lt;/script&gt;
+&lt;script language="javascript" type="text/javascript" src="js/jquery.flot.min.js"&gt;&lt;/script&gt;
+&lt;script language="javascript" type="text/javascript" src="js/allan.js"&gt;&lt;/script&gt;
+</code></pre>
+
+<p>Prepare a data array or file (one value per line):</p>
+
+<pre><code>var nbs = [ 
+  8.920000000000000e+02, 
+  8.090000000000000e+02,
+  8.230000000000000e+02,
+  7.980000000000000e+02,
+  6.710000000000000e+02,
+  6.440000000000000e+02,
+  8.830000000000000e+02,
+  9.030000000000000e+02,
+  6.770000000000000e+02 
+];
+</code></pre>
+
+<p>Create an AllanJS Dataset:</p>
+
+<pre><code>var allan1 = new Allan.Dataset('example 1');
+</code></pre>
+
+<p>Load data from array: </p>
+
+<pre><code>allan1.loadFreqFromArray(nbs);
+</code></pre>
+
+<p>Get Allan deviation values for tau = 1, 2, 4:</p>
+
+<pre><code>console.log(allan1.getAdev(1), allan1.getAdev(2), allan1.getAdev(4));
+</code></pre>
+
+<p>Get Hadamard deviation values for tau = 1, 2, 4:</p>
+
+<pre><code>console.log(allan1.getHdev(1), allan1.getHdev(2), allan1.getHdev(4));
+</code></pre>
+
+<p>Generate sigma-tau plot (it will be placed in a div with id='plot1'):</p>
+
+<pre><code>var plot1 = allan1.getSigmaTauPlot(['ADEV', 'HDEV']);
+
+$.plot($('#plot1'), plot1.values, plot1.options);
+</code></pre>
+
+<h1>Acknowledgements</h1>
+
+<p>This library is based on several Frequency Stability Analysis tools:</p>
+
+<ul>
+<li>adev3, by <strong>Tom Van Baak</strong> <a href="http://www.leapsecond.com/">http://www.leapsecond.com/</a>.</li>
+<li>allan, by <strong>Magnus Danielson</strong> <a href="http://rubidium.dyndns.org/">http://rubidium.dyndns.org/</a>.</li>
+<li>Stable32, by <strong>William J. Riley</strong> <a href="http://www.stable32.com/">http://www.stable32.com/</a>.</li>
+<li>TimeLab, by <strong>John Miles</strong> <a href="http://www.ke5fx.com/">http://www.ke5fx.com/</a>.</li>
+</ul><p>Plots are created using Flot, a pure Javascript plotting library for jQuery, by <strong>Ole Laursen</strong> <a href="http://code.google.com/p/flot/">http://code.google.com/p/flot/</a>.</p>
+
+<h1>Download</h1>
+
+<p>Source code available on GitHub: <a href="https://github.com/txipi/AllanJS/downloads">https://github.com/txipi/AllanJS/downloads</a>.</p>
+      </section>
+      <footer>
+        <p>This project is maintained by <a href="https://github.com/txipi">txipi</a></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+      </footer>
+    </div>
+    <script src="javascripts/scale.fix.js"></script>
+    
+  </body>
+</html>
