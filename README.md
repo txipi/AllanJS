@@ -25,7 +25,7 @@ Data preprocessing
 
 Frequency Stability Measures
 
-- Maximum, minimum and average for phase and frequency values based on averaging times (tau).
+- Maximum, minimum, mean and standard deviation for phase and frequency values based on averaging times (tau).
 - Original Allan deviation (ADEV).
 - Overlapping Allan deviation (OADEV).
 - Modified Allan deviation (MDEV).
