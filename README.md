@@ -87,7 +87,7 @@ Get Hadamard deviation values for tau = 1, 2, 4:
 Generate sigma-tau plot (it will be placed in a div with id='plot1'):
 
     var plot1 = allan1.getSigmaTauPlot(['ADEV', 'HDEV']);
-    $.plot($('#plot1'), plot.values, plot.options);
+    $.plot($('#plot1'), plot1.values, plot1.options);
 
 Acknowledgements
 ================
