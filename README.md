@@ -43,6 +43,52 @@ Plots
 - Frequency data plot.
 - Sigma-tau plots of Allan estimators.
 
+How to use it
+=============
+
+How to use it
+
+Include AllanJS and Flot + jQuery:
+
+    <script language="javascript" type="text/javascript" src="js/jquery.min.js"></script>
+    <script language="javascript" type="text/javascript" src="js/jquery.flot.min.js"></script>
+    <script language="javascript" type="text/javascript" src="js/allan.js"></script>
+
+Prepare a data array or file (one value per line):
+
+    var nbs = [ 
+      8.920000000000000e+02, 
+      8.090000000000000e+02,
+      8.230000000000000e+02,
+      7.980000000000000e+02,
+      6.710000000000000e+02,
+      6.440000000000000e+02,
+      8.830000000000000e+02,
+      9.030000000000000e+02,
+      6.770000000000000e+02 
+    ];
+
+Create an AllanJS Dataset:
+
+    var allan1 = new Allan.Dataset('example 1');
+
+Load data from array:
+
+    allan1.loadFreqFromArray(nbs);
+
+Get Allan deviation values for tau = 1, 2, 4:
+
+    console.log(allan1.getAdev(1), allan1.getAdev(2), allan1.getAdev(4));
+
+Get Hadamard deviation values for tau = 1, 2, 4:
+
+    console.log(allan1.getHdev(1), allan1.getHdev(2), allan1.getHdev(4));
+
+Generate sigma-tau plot (it will be placed in a div with id='plot1'):
+
+    var plot1 = allan1.getSigmaTauPlot(['ADEV', 'HDEV']);
+    $.plot($('#plot1'), plot.values, plot.options);
+
 Acknowledgements
 ================
 
