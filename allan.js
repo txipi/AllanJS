@@ -7,6 +7,7 @@
  *   adev3, by Tom Van Baak <http://www.leapsecond.com/>
  *   allan, by Magnus Danielson <http://rubidium.dyndns.org/>
  *   Stable32, by William J. Riley <http://www.stable32.com/>
+ *   Timelab, by John Miles <http://www.ke5fx.com/>
  *   Flot, by Ole Laursen <http://code.google.com/p/flot/>
  *
  * Available under MIT license.
